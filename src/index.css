@@ -1,0 +1,300 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: monospace;
+  background-color: #f0ebe3;
+  line-height: 1.6;
+}
+
+ul {
+  list-style: none;
+}
+
+h4 {
+  font-size: 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+}
+
+.header h1 {
+  background: #ca4246;
+  background-color: #ca4246;
+  background: conic-gradient(
+    #ca4246 16.666%,
+    #e16541 16.666%,
+    #e16541 33.333%,
+    darkorchid 33.333%,
+    darkblue 50%,
+    #8b9862 50%,
+    #8b9862 66.666%,
+    #476098 16.666%,
+    #11009e 16.333%,
+    #a7489b 83.333%
+  );
+
+  /* Set thee background size and repeat properties. */
+  background-size: 57%;
+  background-repeat: repeat;
+
+  /* Use the text as a mask for the background. */
+  /* This will show the gradient as a text color rather than element bg. */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* Animate the text when loading the element. */
+  /* This animates it on page load and when hovering out. */
+  animation: rainbow-text-animation-rev 0.5s ease forwards;
+
+  cursor: pointer;
+}
+
+.header h1:hover {
+  animation: rainbow-text-animation 0.5s ease forwards;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.watch {
+  width: 50%;
+}
+
+.read {
+  width: 50%;
+}
+
+.card {
+  background-color: #4942e4;
+  color: #fae7f3;
+  border: 0.1rem solid #1c1678;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px #11009e dashed;
+  margin-right: 1rem;
+}
+.dropdown-menu {
+  background-color: #11009e;
+}
+
+.dropdown:hover {
+  background-color: #ff9843 !important;
+  border-radius: 1rem;
+  transform: scale(1.1);
+}
+/* buttons styles */
+.btn {
+  cursor: pointer;
+  border: 0;
+  background-color: transparent;
+}
+
+.btn-add {
+  border: 1px solid #11235a;
+  color: #e6b9de;
+}
+
+.btn-add:hover {
+  transform: scale(0.98);
+  border: 1px solid #e6b9de;
+  color: #11235a;
+}
+
+.message {
+  font-size: 1.2rem;
+  padding: 1rem;
+  margin: 1rem 0;
+  border: #11009e 0.5px solid;
+  text-align: center;
+  color: rebeccapurple;
+}
+
+/* form */
+form {
+  display: flex;
+  flex-direction: column !important;
+  justify-content: center;
+  align-items: center;
+  background-color: #86a7fc !important;
+}
+textarea {
+  border-width: 2px;
+  border-style: solid;
+  border-image: linear-gradient(to right, darkblue, darkorchid) 1;
+}
+.rating {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 30px 0 40px;
+}
+
+.rating li {
+  position: relative;
+  background: #e6b9de;
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 19px;
+  border: 1px #eee solid;
+  transition: 0.3s;
+}
+
+.rating li label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 45px;
+  height: 45px;
+  padding: 10px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.rating li:hover {
+  background: #11009e;
+  color: #fff;
+}
+
+[type="radio"] {
+  opacity: 0;
+}
+
+[type="radio"]:checked ~ label {
+  background: #11009e;
+  color: #fff;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #ccc;
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+
+input {
+  flex-grow: 2;
+  border: none;
+  font-size: 16px;
+  width: 70%;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border: 2px solid #e6b9de;
+}
+
+.box {
+  --box-border--border: linear-gradient(
+    105deg,
+    rgb(255 46 144) 0%,
+    rgb(61 35 185) 100%
+  );
+
+  /* classic 9-slide-scaling with 2px border 4px rounded corners. change `rx` and `ry` parameters to adjust border-radius */
+  --box--border__top-left: url("data:image/svg+xml,<svg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'><rect x='1' y='1' width='18' height='18' rx='4' ry='4' stroke='%23000' stroke-width='2' /></svg>");
+  --box--border__top: url("data:image/svg+xml,<svg preserveAspectRatio='none' width='100' height='10' viewBox='0 0 100 10' fill='none' xmlns='http://www.w3.org/2000/svg'><line x1='-1' y1='1' x2='101' y2='1' stroke='%23000' stroke-width='2'/></svg>");
+  --box--border__top-right: url("data:image/svg+xml,<svg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'><rect x='-9' y='1' width='18' height='18' rx='4' ry='4' stroke='black' stroke-width='2' /></svg>");
+  --box--border__left: url("data:image/svg+xml,<svg preserveAspectRatio='none' width='10' height='100' viewBox='0 0 10 100' fill='none' xmlns='http://www.w3.org/2000/svg'><line x1='1' y1='-1' x2='1' y2='101' stroke='%23000' stroke-width='2'/></svg>");
+  --box--border__right: url("data:image/svg+xml,<svg preserveAspectRatio='none' width='10' height='100' viewBox='0 0 10 100' fill='none' xmlns='http://www.w3.org/2000/svg'><line x1='9' y1='-1' x2='9' y2='101' stroke='%23000' stroke-width='2'/></svg>");
+  --box--border__bottom-left: url("data:image/svg+xml,<svg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'><rect x='1' y='-9' width='18' height='18' rx='4' ry='4' stroke='%23000' stroke-width='2' /></svg>");
+  --box--border__bottom: url("data:image/svg+xml,<svg preserveAspectRatio='none' width='100' height='10' viewBox='0 0 100 10' fill='none' xmlns='http://www.w3.org/2000/svg'><line x1='-1' y1='9' x2='101' y2='9' stroke='%23000' stroke-width='2'/></svg>");
+  --box--border__bottom-right: url("data:image/svg+xml,<svg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'><rect x='-9' y='-9' width='18' height='18' rx='4' ry='4' stroke='black' stroke-width='2' /></svg>");
+  padding: 1rem;
+  position: relative;
+  resize: both;
+  overflow: hidden;
+  font-weight: 700;
+  width: 100%;
+  max-width: 30ch;
+}
+
+.box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--box-border--border);
+  mask: var(--box--border__top-left) 0 0 / 0.625rem 0.625rem,
+    var(--box--border__top) 0.625rem 0 / calc(100% - 1.25rem) 0.625rem,
+    var(--box--border__top-right) 100% 0 / 0.625rem 0.625rem,
+    var(--box--border__left) 0 0.625rem / 0.625rem calc(100% - 1.25rem),
+    var(--box--border__right) 100% 0.625rem / 0.625rem calc(100% - 1.25rem),
+    var(--box--border__bottom-left) 0 100% / 0.625rem 0.625rem,
+    var(--box--border__bottom) 0.625rem 100% / calc(100% - 1.25rem) 0.625rem,
+    var(--box--border__bottom-right) 100% 100% / 0.625rem 0.625rem;
+  mask-repeat: no-repeat;
+}
+
+@keyframes rainbow-text-animation {
+  0% {
+    background-size: 57%;
+    background-position: 0 0;
+  }
+  20% {
+    background-size: 57%;
+    background-position: 0 1em;
+  }
+  100% {
+    background-size: 300%;
+    background-position: -9em 1em;
+  }
+}
+
+/* Move the background and make it smaller. */
+/* Animation shown when entering the page and after the hover animation. */
+@keyframes rainbow-text-animation-rev {
+  0% {
+    background-size: 300%;
+    background-position: -9em 1em;
+  }
+  20% {
+    background-size: 57%;
+    background-position: 0 1em;
+  }
+  100% {
+    background-size: 57%;
+    background-position: 0 0;
+  }
+}
+
+@media screen and (max-width: 766px) {
+  .container {
+    flex-direction: column;
+  }
+  .watch {
+    width: 100%;
+  }
+  .read {
+    width: 100%;
+    border-top: 2px solid darkorchid;
+  }
+}
