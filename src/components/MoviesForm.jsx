@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
-import { MdMovieFilter } from "react-icons/md";
 import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import { toast } from "react-toastify";
 import { db } from "../firebase.config";
 import RatingSelect from "./RatingSelect";
+import { MdMovieFilter } from "react-icons/md";
 
 function MoviesForm({ movieEdit, fetchMovies }) {
   const [text, setText] = useState("");
@@ -13,6 +15,8 @@ function MoviesForm({ movieEdit, fetchMovies }) {
   const [messages, setMessages] = useState("");
   const [showToggle, setShowToggle] = useState(false);
   const [card, setCard] = useState();
+
+  const auth = getAuth();
 
   useEffect(() => {
     if (movieEdit.edit === true) {
@@ -39,20 +43,74 @@ function MoviesForm({ movieEdit, fetchMovies }) {
     e.preventDefault();
     if (text !== "" && date !== "" && rating !== "" && comment !== "") {
       const newMovie = { text, date, rating, comment };
-      // eslint-disable-next-line
+
       if (movieEdit.edit === true) {
         const docRef = doc(db, "movies", movieEdit.item.id);
-        await updateDoc(docRef, newMovie);
+        if (auth.currentUser) {
+          await updateDoc(docRef, {
+            ...newMovie,
+            userRef: auth.currentUser.uid,
+          });
+          toast(`📖 ${text} was updated successfully 🥳!`, {
+            position: "top-right",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        } else {
+          await updateDoc(docRef, newMovie);
+          toast(`📖 ${text} was updated successfully 🥳!`, {
+            position: "top-right",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
       } else {
-        // eslint-disable-next-line
-        const docRef = await addDoc(collection(db, "movies"), newMovie);
+        if (auth.currentUser) {
+          await addDoc(collection(db, "movies"), {
+            ...newMovie,
+            userRef: auth.currentUser.uid,
+          });
+          toast(`🍿 ${text} was added successfully 🥳!`, {
+            position: "top-right",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        } else {
+          await addDoc(collection(db, "movies"), {
+            ...newMovie,
+          });
+          toast(`🍿 ${text} was added successfully 🥳!`, {
+            position: "top-right",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
       }
       fetchMovies();
       setShowToggle(!showToggle);
       setText("");
       setDate("");
       setComment("");
-      setMessages(` ${text} was added successfully 🥳`);
       setTimeout(() => {
         setMessages(null);
       }, 2000);
@@ -63,7 +121,6 @@ function MoviesForm({ movieEdit, fetchMovies }) {
       }, 2000);
     }
   };
-
   const openForm = () => {
     setCard("card");
     setShowToggle(!showToggle);

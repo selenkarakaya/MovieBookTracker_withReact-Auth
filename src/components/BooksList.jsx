@@ -1,5 +1,6 @@
 import BooksItem from "./BooksItem";
 import BookForm from "./BookForm";
+import Spinner from "./Spinner";
 import { useEffect, useState } from "react";
 import {
   collection,
@@ -10,7 +11,7 @@ import {
   doc,
 } from "firebase/firestore";
 import { db } from "../firebase.config";
-import Spinner from "./Spinner";
+import { getAuth } from "firebase/auth";
 import { motion, AnimatePresence } from "framer-motion";
 
 function BooksList() {
@@ -18,8 +19,11 @@ function BooksList() {
   const [loading, setLoading] = useState(true);
   const [showToggle, setShowToggle] = useState(false);
   const [bookEdit, setBookEdit] = useState({ item: {}, edit: false });
+  const auth = getAuth();
+  var user = auth.currentUser;
   useEffect(() => {
     fetchBooks();
+    // eslint-disable-next-line
   }, []);
   const fetchBooks = async () => {
     try {
@@ -30,10 +34,19 @@ function BooksList() {
       const querySnap = await getDocs(q);
       const books = [];
       querySnap.forEach((doc) => {
-        return books.push({
-          id: doc.id,
-          data: doc.data(),
-        });
+        if (user) {
+          if (doc.data().userRef === auth.currentUser.uid) {
+            return books.push({
+              id: doc.id,
+              data: doc.data(),
+            });
+          }
+        } else if (doc.data().userRef === undefined) {
+          return books.push({
+            id: doc.id,
+            data: doc.data(),
+          });
+        }
       });
       setBooks(books);
       setLoading(false);
@@ -46,7 +59,6 @@ function BooksList() {
     const updatedBooks = books.filter((item) => item.id !== itemId);
     setBooks(updatedBooks);
   };
-
   const onEdit = (item) => {
     setShowToggle(!showToggle);
     setBookEdit({ item, edit: true });

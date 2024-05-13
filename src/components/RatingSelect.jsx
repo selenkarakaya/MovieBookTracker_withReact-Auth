@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 function RatingSelect({ select, movieEdit }) {
-  const [selected, setSelected] = useState(5);
+  const [selected, setSelected] = useState(2);
   useEffect(() => {
     if (movieEdit.edit === true) {
       setSelected(movieEdit.item.data.rating);

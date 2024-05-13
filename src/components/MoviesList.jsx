@@ -1,3 +1,6 @@
+import MoviesItem from "./MoviesItem";
+import MoviesForm from "./MoviesForm";
+import Spinner from "./Spinner";
 import { useEffect, useState } from "react";
 import {
   collection,
@@ -9,15 +12,15 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase.config";
 import { motion, AnimatePresence } from "framer-motion";
-import Spinner from "./Spinner";
-import MoviesItem from "./MoviesItem";
-import MoviesForm from "./MoviesForm";
+import { getAuth } from "firebase/auth";
 
 function MoviesList() {
   const [movies, setMovies] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showToggle, setShowToggle] = useState(false);
   const [movieEdit, setMovieEdit] = useState({ item: {}, edit: false });
+  const auth = getAuth();
+  var user = auth.currentUser;
 
   useEffect(() => {
     fetchMovies();
@@ -32,10 +35,19 @@ function MoviesList() {
       const querySnap = await getDocs(q);
       const movies = [];
       querySnap.forEach((doc) => {
-        return movies.push({
-          id: doc.id,
-          data: doc.data(),
-        });
+        if (user) {
+          if (doc.data().userRef === auth.currentUser.uid) {
+            return movies.push({
+              id: doc.id,
+              data: doc.data(),
+            });
+          }
+        } else if (doc.data().userRef === undefined) {
+          return movies.push({
+            id: doc.id,
+            data: doc.data(),
+          });
+        }
       });
       setMovies(movies);
       setLoading(false);

@@ -1,8 +1,10 @@
-import { PiBooks } from "react-icons/pi";
 import { useState, useEffect } from "react";
 import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 import { db } from "../firebase.config";
+import { toast } from "react-toastify";
 import RatingReview from "./RatingReview";
+import { PiBooks } from "react-icons/pi";
 
 function BookForm({ bookEdit, fetchBooks }) {
   const [text, setText] = useState("");
@@ -15,9 +17,10 @@ function BookForm({ bookEdit, fetchBooks }) {
   const [showToggle, setShowToggle] = useState(false);
   const [card, setCard] = useState();
 
+  const auth = getAuth();
+
   useEffect(() => {
     if (bookEdit.edit === true) {
-      console.log(bookEdit.edit);
       setText(bookEdit.item.data.text);
       setDate(bookEdit.item.data.date);
       setComment(bookEdit.item.data.comment);
@@ -40,13 +43,66 @@ function BookForm({ bookEdit, fetchBooks }) {
     e.preventDefault();
     if (text !== "" && date !== "" && rating !== "") {
       const newBook = { text, date, rating, comment };
-      // eslint-disable-next-line
+
       if (bookEdit.edit === true) {
         const docRef = doc(db, "books", bookEdit.item.id);
-        await updateDoc(docRef, newBook);
+        if (auth.currentUser) {
+          await updateDoc(docRef, {
+            ...newBook,
+            userRef: auth.currentUser.uid,
+          });
+          toast(`📖 ${text} was updated successfully 🥳!`, {
+            position: "top-right",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        } else {
+          toast(`📖 ${text} was updated successfully 🥳!`, {
+            position: "top-right",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          await updateDoc(docRef, newBook);
+        }
       } else {
-        // eslint-disable-next-line
-        const docRef = await addDoc(collection(db, "books"), newBook);
+        if (auth.currentUser) {
+          toast(`📖 ${text} was added successfully 🥳!`, {
+            position: "top-right",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          await addDoc(collection(db, "books"), {
+            ...newBook,
+            userRef: auth.currentUser.uid,
+          });
+        } else {
+          toast(`📖 ${text} was added successfully 🥳!`, {
+            position: "top-right",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          await addDoc(collection(db, "books"), newBook);
+        }
       }
       fetchBooks();
       setShowToggle(!showToggle);
@@ -54,7 +110,6 @@ function BookForm({ bookEdit, fetchBooks }) {
       setDate("");
       setComment("");
 
-      setMessages(` ${text} was added successfully 🥳`);
       setTimeout(() => {
         setMessages(null);
       }, 2000);

@@ -18,6 +18,27 @@ h4 {
   font-size: 1rem;
 }
 
+a {
+  text-decoration: none;
+  color: #201658;
+  font-style: italic;
+}
+nav {
+  width: 90%;
+  margin: 0.5rem auto;
+}
+nav a {
+  font-size: 1.2rem;
+  color: #ca4246;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #11009e;
+  border-radius: 2rem;
+}
+
+nav a:hover {
+  border-bottom: 1px solid #ca4246;
+  color: #11009e;
+}
 .header {
   display: flex;
   justify-content: center;
@@ -45,16 +66,13 @@ h4 {
   /* Set thee background size and repeat properties. */
   background-size: 57%;
   background-repeat: repeat;
-
   /* Use the text as a mask for the background. */
   /* This will show the gradient as a text color rather than element bg. */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-
   /* Animate the text when loading the element. */
   /* This animates it on page load and when hovering out. */
   animation: rainbow-text-animation-rev 0.5s ease forwards;
-
   cursor: pointer;
 }
 
@@ -112,11 +130,27 @@ h4 {
   border: 1px solid #11235a;
   color: #e6b9de;
 }
+.btn-sign {
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid #b7c9f2;
+  color: #f9f07a;
+}
+.btn-sign:hover {
+  border: 1px solid #f9f07a;
+  color: #b7c9f2;
+}
 
 .btn-add:hover {
   transform: scale(0.98);
   border: 1px solid #e6b9de;
   color: #11235a;
+}
+
+.btn-logOut {
+  border: 1px solid #b7c9f2;
+  color: #11235a;
+  background: none;
 }
 
 .message {
@@ -210,6 +244,24 @@ textarea:focus {
   border: 2px solid #e6b9de;
 }
 
+.passwordInputDiv {
+  position: relative;
+}
+.showPassword {
+  cursor: pointer;
+  position: absolute;
+  top: 4%;
+  right: 0%;
+  padding: 1rem;
+}
+.form-container {
+  width: 50%;
+  background-color: #9195f6 !important;
+}
+.signForm {
+  background-color: #9195f6 !important;
+}
+
 .box {
   --box-border--border: linear-gradient(
     105deg,
@@ -296,5 +348,9 @@ textarea:focus {
   .read {
     width: 100%;
     border-top: 2px solid darkorchid;
+  }
+
+  .navbar {
+    flex-direction: column;
   }
 }
