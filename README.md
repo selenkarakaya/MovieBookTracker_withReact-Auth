@@ -28,7 +28,6 @@ The tracker is versatile, allowing users to maintain a comprehensive record of t
 ## Demo 🔗
 🎥 Visit the Movies & Book Tracker ([https://moviesbooktracker.netlify.app/]).
 
-
 ## 🚀 Installation
 To set up the Monthly Planner on your local machine:
 
@@ -52,6 +51,3 @@ To set up the Monthly Planner on your local machine:
 
 ## Contributing
 - If you'd like to contribute to the project, please fork the repository and create a pull request with your proposed changes.🤝
-
-
-
