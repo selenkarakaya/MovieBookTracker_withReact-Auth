@@ -12,7 +12,7 @@ The tracker is versatile, allowing users to maintain a comprehensive record of t
 - **Responsive Design**: Built with Tailwind CSS and DaisyUI for a modern look and feel.📱💻
 
 ## 👾 Technologies Used
-- **HTML5,CSS3**:For structuring the app.📄
+- **HTML5,CSS3**: For structuring the app.📄
 - **Tailwind CSS**: For styling the application.🎨
 - **DaisyUI**: For pre-designed components.
 - **React.js**: For building the user interface.⚛️
