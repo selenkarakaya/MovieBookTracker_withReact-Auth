@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { toast } from "react-toastify";
@@ -59,62 +59,63 @@ function SignIn() {
       });
     }
   };
-  if (!auth.currentUser) {
-    return (
-      <div className="">
-        <header>
-          <p className="fs-3 my-2 text-center font-mono">Welcome!</p>
-          <p className="fs-6 text-center">Sign in & Enjoy it 💌 </p>
-        </header>
-        <form onSubmit={onSubmit} className="signForm form-container mx-auto">
-          <div className="mb-2">
-            <input
-              type="email"
-              id="email"
-              className="form-control"
-              placeholder="Email"
-              value={email}
-              onChange={onChange}
-            />
-          </div>
-          <div className="passwordInputDiv">
-            <input
-              type={showPassword ? "text" : "password"}
-              id="password"
-              className="form-control"
-              placeholder="Password"
-              value={password}
-              onChange={onChange}
-            />
-            <img
-              src={visibilityIcon}
-              alt="show password"
-              className="showPassword"
-              onClick={() => setShowPassword((prevState) => !prevState)}
-            />
-          </div>
 
-          <div className="d-flex my-4 justify-content-center">
-            <div className="d-flex justify-content-center align-items-center w-100">
-              <button className="p-2 btn-sign">Sign In</button>
-              <span className="mx-2">or</span>
-              <OAuth />
-            </div>
-          </div>
-        </form>
-        <div className="d-flex justify-content-between form-container mx-auto">
-          <Link to="/SignUp" className="m-2">
-            Sign Up Instead
-          </Link>
-          <Link to="/ForgetPassword" className="m-2">
-            Forgot Password
-          </Link>
+  return (
+    <div className="">
+      <header>
+        <p className="fs-3 my-2 text-center font-mono">Welcome!</p>
+        <p className="fs-6 text-center">Sign in & Enjoy it 💌 </p>
+      </header>
+      <form onSubmit={onSubmit} className="signForm form-container mx-auto">
+        <div className="mb-2">
+          <input
+            type="email"
+            id="email"
+            className="form-control"
+            placeholder="Email"
+            value={email}
+            onChange={onChange}
+            data-testid="email-input"
+          />
         </div>
+        <div className="passwordInputDiv">
+          <input
+            type={showPassword ? "text" : "password"}
+            id="password"
+            className="form-control"
+            placeholder="Password"
+            value={password}
+            onChange={onChange}
+            data-testid="password-input"
+          />
+          <img
+            src={visibilityIcon}
+            alt="show password"
+            className="showPassword"
+            onClick={() => setShowPassword((prevState) => !prevState)}
+          />
+        </div>
+
+        <div className="d-flex my-4 justify-content-center">
+          <div className="d-flex justify-content-center align-items-center w-100">
+            <button className="p-2 btn-sign" data-testid="submit-button">
+              Sign In
+            </button>
+            <span className="mx-2">or</span>
+            <OAuth />
+          </div>
+        </div>
+      </form>
+      <div className="d-flex justify-content-between form-container mx-auto">
+        <Link to="/SignUp" className="m-2">
+          Sign Up Instead
+        </Link>
+        <Link to="/ForgetPassword" className="m-2">
+          Forgot Password
+        </Link>
       </div>
-    );
-  } else {
-    return <Navigate to="/Profile" replace={true} />;
-  }
+    </div>
+  );
 }
 
 export default SignIn;
