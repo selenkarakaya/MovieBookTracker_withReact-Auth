@@ -1,0 +1,36 @@
+name: Run Tests
+
+# This workflow will run when you push to any branch or create a pull request
+on:
+  push:
+    branches:
+      - main   # Change this to the branch you want to trigger tests for
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest   # This specifies the environment the job will run on
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3   # Check out the code from the repository
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3  # Set up the Node.js environment
+      with:
+        node-version: '16'  # Specify the Node.js version to use (adjust as needed)
+
+    - name: Install dependencies
+      run: npm install   # Install all dependencies listed in package.json
+
+    - name: Run tests
+      run: npm test       # Run the test script defined in your package.json
+
+    - name: Upload test results (optional)
+      if: always()       # This ensures that test results are uploaded even if tests fail
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-results
+        path: path/to/test-reports # Adjust the path to where your test results are stored
