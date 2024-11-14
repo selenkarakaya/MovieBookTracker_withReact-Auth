@@ -79,7 +79,7 @@ function SignUp() {
     }
   };
   return (
-    <div className="">
+    <div>
       <h4 className="text-center mb-4">Create an Account</h4>
       <form onSubmit={onSubmit} className="signForm form-container mx-auto">
         <div data-mdb-input-init className="form-outline mb-2">
@@ -91,6 +91,7 @@ function SignUp() {
             className="form-control"
             value={name}
             onChange={onChange}
+            data-testid="name-input"
           />
         </div>
         <div data-mdb-input-init className="form-outline mb-2">
@@ -101,6 +102,7 @@ function SignUp() {
             className="form-control"
             value={email}
             onChange={onChange}
+            data-testid="email-input"
           />
         </div>
         <div data-mdb-input-init className="form-outline passwordInputDiv">
@@ -111,6 +113,7 @@ function SignUp() {
             className="form-control"
             value={password}
             onChange={onChange}
+            data-testid="password-input"
           />
 
           <img
