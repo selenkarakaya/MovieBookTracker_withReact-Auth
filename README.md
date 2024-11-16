@@ -1,9 +1,10 @@
-# Movies & Book Tracker ![Movies & Book Tracker](./src/assets/book.png) 
+<h1 align="center">🎥📚  Movies & Book Tracker</h1>     
 <p align="center">
 <a href="https://github.com/selenkarakaya/MovieBookTracker_withReact-Auth/actions/workflows/test.yml" target="_blank">
     <img src="https://github.com/selenkarakaya/MovieBookTracker_withReact-Auth/actions/workflows/test.yml/badge.svg" alt="Test">
 </a>
 </p>
+
 ## ✨ Description
 The **Movies & Book Tracker** is a web application designed to help users manage and organize their movie and book experiences. This project serves as a convenient diary for users to capture their thoughts and opinions on movies as they watch them or to keep track of the books they read. With features for reviewing, rating, and commenting, it facilitates discussions and recommendations among friends and fellow enthusiasts.
 
@@ -43,7 +44,8 @@ Through the **Movies & Book Tracker** project, I gained valuable insights and sk
 This project solidified my understanding of web development and deepened my passion for building applications that enhance personal organization and community engagement in entertainment.
 
 ## Demo 🔗
-🎥 Visit the Movies & Book Tracker ([https://moviesbooktracker.netlify.app/]).
+
+🎥 [**Visit the Movies & Book Tracker!**](https://moviesbooktracker.netlify.app/)
 
 ## 🚀 Installation
 To set up the Monthly Planner on your local machine:
